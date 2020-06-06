@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, Redirect } from 'react-router';
 import { createBrowserHistory } from 'history';
 
-import QuestionsList from '../pages/questions-list/QuestionsList';
+import SurveysList from '../pages/surveys-list/SurveysList';
 
 const history = createBrowserHistory();
 
@@ -11,10 +11,10 @@ const AppRoutes = () => {
     <Router history={history}>
       <Route
         exact
-        path="/questions"
-        component={() => <QuestionsList history={history} />}
+        path="/surveys"
+        component={() => <SurveysList history={history} />}
       />
-      <Route exact path="/" render={() => <Redirect to="/questions" />} />
+      <Route exact path="/" render={() => <Redirect to="/surveys" />} />
     </Router>
   );
 };
