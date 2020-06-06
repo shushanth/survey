@@ -37,6 +37,7 @@ const reducer = (state = rootState, { type, payload }) => {
         ...state,
         surveysError: true,
         surveysFetching: false,
+        surveys: [],
       };
     }
 

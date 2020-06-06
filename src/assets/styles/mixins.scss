@@ -1,43 +1,43 @@
 @mixin styles-flex($direction: row) {
-    display: flex;
-    flex-direction: $direction;
-  }
-  
-  @mixin styles-flex--align($hz-center: initial, $vl-center: initial) {
-    align-items: $vl-center;
-    justify-content: $hz-center;
-  }
-  
-  @mixin styles-box-shadow($color: $styles-color-gray-light) {
-    -webkit-box-shadow: 0px 1px 1px $color;
-    -moz-box-shadow: 0px 1px 1px $color;
-    box-shadow: 0px 1px 1px $color;
-  }
-  
-  @mixin styles-text-overflow($type: initial) {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: $type;
-  }
-  
-  @mixin styles-grid($row: auto, $col: auto, $flow: row) {
-    display: grid;
-    display: -ms-grid;
-    grid-template-rows: $row;
-    grid-template-columns: $col;
-    grid-auto-flow: $flow;
-  }
-  
-  @mixin styles-grid-gap($row: 1rem, $col: 2rem) {
-    grid-gap: $row $col;
-    -ms-grid-gap: $row $col;
-  }
-  
-  @mixin styles-fit($type: initial) {
-    object-fit: $type;
-  }
-  
-  @mixin styles-hz-line() {
-    width: 100%;
-    border: 1px solid $styles-color-gray-medium;
-  }
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin styles-flex--align($hz-center: initial, $vl-center: initial) {
+  align-items: $vl-center;
+  justify-content: $hz-center;
+}
+
+@mixin styles-box-shadow($color: $styles-color-gray-light) {
+  -webkit-box-shadow: 0px 1px 1px $color;
+  -moz-box-shadow: 0px 1px 1px $color;
+  box-shadow: 0px 1px 1px $color;
+}
+
+@mixin styles-text-overflow($type: initial) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: $type;
+}
+
+@mixin styles-grid($row: auto, $col: auto, $flow: row) {
+  display: grid;
+  display: -ms-grid;
+  grid-template-rows: $row;
+  grid-template-columns: $col;
+  grid-auto-flow: $flow;
+}
+
+@mixin styles-grid-gap($row: 1rem, $col: 2rem) {
+  grid-gap: $row $col;
+  -ms-grid-gap: $row $col;
+}
+
+@mixin styles-fit($type: initial) {
+  object-fit: $type;
+}
+
+@mixin styles-hz-line() {
+  width: 100%;
+  border: 1px solid $styles-color-gray-medium;
+}

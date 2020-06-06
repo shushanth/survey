@@ -1,8 +1,8 @@
 /**
  * rootState
- * questionsFetching (boolean), To show loading state in the ui
- * questionsError(boolean),  To show any recipe error occured
- * questions([]{...}) , To Show the recipes,
+ * surveysFetching (boolean), To show loading state in the ui.
+ * surveysError(boolean),  To show any surveys error occurred.
+ * surveys([]{...}) , To Show the surveys,
  */
 const rootState = {
   surveysFetching: false,
