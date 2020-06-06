@@ -1,0 +1,13 @@
+@import '../../../../assets/styles/mixins';
+@import '../../../../assets/styles/variables';
+
+.header_container {
+  width: 100%;
+  top: 0;
+  padding: 2.25rem 1rem;
+  z-index: 100;
+  background-color: $styles-color-cloud-sky;
+  @include styles-flex();
+  @include styles-flex--align(center, center);
+  @include styles-box-shadow();
+}

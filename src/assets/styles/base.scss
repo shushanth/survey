@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+@import './variables.scss';
+@import "./mixins";
+
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: $styles-font--size-default !important;
+  font-family: $styles-font--family-default;
+}
+
+body {
+  background-color: #fff;
+  height: 100vh;
+  overflow: auto;
+  font-size: $styles-font--size-default !important;
+  font-family: $styles-font--family-default;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+div,
+span,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  vertical-align: baseline;
+  position: relative;
+}
+
+li,
+ol {
+  list-style: none !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button;
+}
+
+img,
+button {
+  cursor: pointer;
+}
+
+.app-hz-line {
+  @include styles-hz-line();
+}
