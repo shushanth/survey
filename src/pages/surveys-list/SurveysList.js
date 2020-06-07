@@ -1,26 +1,37 @@
 /**
- * @name: QuestionsList
- * @desc container component for the questions list page
+ * @name: SurveysList
+ * @desc container component for the surveys list page
  * @props history
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty } from 'lodash';
+import { isEmpty, uniqueId } from 'lodash';
 
 import { httpService } from '../../api/httpService';
-import { BaseLayout } from '../../shared/components';
+import { BaseLayout, BaseHeading } from '../../shared/components';
 import {
   fetchSurveysRequest,
   fetchSurveysSuccess,
   fetchSurveysFailure,
 } from '../../store/actions/actions';
+import './SurveysList.scss';
 
-const SurveysList = () => {
+const SurveysList = ({ history }) => {
   const dispatch = useDispatch();
   const surveysLoading = useSelector(state => state.questionsFetching);
-  const surveys = useSelector(state => state.surveys);
+  const availableSurveys = useSelector(state => state.surveys);
+
+  //route to survey detail page
+  const onSurveySelect = useCallback(
+    surveyId => {
+      debugger;
+      history.push(`/surveys/${surveyId}`);
+    },
+    [dispatch, history]
+  );
 
   const requestQuestions = () => {
     httpService.request({
@@ -36,18 +47,45 @@ const SurveysList = () => {
 
   // loads once the components mounted, and make request to fetch survey questions
   useEffect(() => {
-    if (isEmpty(surveys)) {
+    if (isEmpty(availableSurveys)) {
       dispatch(fetchSurveysRequest());
       requestQuestions();
     }
   }, []);
   return (
-    <BaseLayout headerTitle="Survey questions">
-      <div>
-        {surveysLoading ? <p>loading...</p> : <div>questions lists</div>}
-      </div>
-    </BaseLayout>
+    <>
+      <BaseLayout headerTitle="The Survey App">
+        <BaseHeading level="h4" theme="dark">
+          Available surveys
+        </BaseHeading>
+        <div className="surveys_list_container">
+          {surveysLoading || isEmpty(availableSurveys) ? (
+            <p>loading...</p>
+          ) : (
+            <div className="questions_container">
+              {availableSurveys.map(({ id, title, tagline }) => {
+                return (
+                  <div
+                    className="question"
+                    key={uniqueId(id)}
+                    onClick={() => onSurveySelect(id)}>
+                    <p>{title}</p>
+                    <p>{tagline}</p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </BaseLayout>
+    </>
   );
+};
+
+SurveysList.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
 };
 
 export default SurveysList;

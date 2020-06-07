@@ -1,11 +1,13 @@
 @import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins';
 
 .layout_container {
   .content_container {
-    padding: 0 4rem;
-    padding: 0 4rem;
+    margin: 0 auto;
+    padding: 2rem;
     height: 100vh;
-    border: 5px solid #ccc;
-    margin: 0 4rem;
+    width: 50rem;
+    @include styles-flex(column);
+    @include styles-box-shadow();
   }
 }

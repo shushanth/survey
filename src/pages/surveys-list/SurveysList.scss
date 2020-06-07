@@ -1,0 +1,38 @@
+@import '../../assets/styles/mixins.scss';
+@import '../../assets/styles/variables';
+
+.surveys_list_container {
+  @include styles-flex(column);
+  border-top: 3px solid $styles-color-gray-scale;
+  margin-top: 0.8rem;
+  .questions_container {
+    margin: 1rem 0;
+    .question {
+      padding: 0.6rem;
+      @include styles-flex();
+      background: $styles-color-gray-medium;
+      margin: 0.2rem 0;
+      font-size: 0.8rem;
+      cursor: pointer;
+      border-radius: 5px; 
+
+      &:hover {
+        background: $styles-color-gray-dull;
+      }
+      p:first-child {
+        flex: none;
+        flex-basis: 10rem;
+        padding-right: 1rem;
+        font-weight: bold; 
+        letter-spacing: 0.07rem;
+        color: #383333;
+        @include styles-text-overflow(ellipsis);
+      }
+
+      p:last-child {
+        flex: 2;
+        @include styles-text-overflow(ellipsis);
+      }
+    }
+  }
+}

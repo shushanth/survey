@@ -8,10 +8,10 @@
   justify-content: $hz-center;
 }
 
-@mixin styles-box-shadow($color: $styles-color-gray-light) {
-  -webkit-box-shadow: 0px 1px 1px $color;
-  -moz-box-shadow: 0px 1px 1px $color;
-  box-shadow: 0px 1px 1px $color;
+@mixin styles-box-shadow($color: $styles-color-gray-dark) {
+  -webkit-box-shadow: 0px 5px 5px $color;
+  -moz-box-shadow: 0px 5px 5px $color;
+  box-shadow: 0px 5px 5px $color;
 }
 
 @mixin styles-text-overflow($type: initial) {

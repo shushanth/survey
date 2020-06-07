@@ -6,8 +6,7 @@
   top: 0;
   padding: 2.25rem 1rem;
   z-index: 100;
-  background-color: $styles-color-cloud-sky;
+  background-color: $styles-color-black-dull;
   @include styles-flex();
   @include styles-flex--align(center, center);
-  @include styles-box-shadow();
 }
