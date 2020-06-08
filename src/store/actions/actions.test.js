@@ -2,6 +2,7 @@ import {
   fetchSurveysRequest,
   fetchSurveysSuccess,
   fetchSurveysFailure,
+  setCurrentSelectedSurvey,
 } from './actions';
 import { getMockSurveys } from '../reducers/mocks/mockSurveys';
 
@@ -34,5 +35,15 @@ describe('actions', () => {
     expect(fetchSurveysFailure({ error: 'something went wrong' })).toEqual(
       expectedAction
     );
+  });
+
+  it('should create action to set current selected survey', () => {
+    const expectedAction = {
+      type: 'SET_CURRENT_SELECTED_SURVEY',
+      payload: { id: '002', title: 'This is about Politics' },
+    };
+    expect(
+      setCurrentSelectedSurvey({ id: '002', title: 'This is about Politics' })
+    ).toEqual(expectedAction);
   });
 });

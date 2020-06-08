@@ -8,6 +8,9 @@ const rootState = {
   surveysFetching: false,
   surveysError: false,
   surveys: [],
+  surveyQuestionsFetching: false,
+  surveyQuestionsError: false,
+  currentSelectedSurvey: { id: '', value: '', questions: [] },
 };
 
 export default rootState;

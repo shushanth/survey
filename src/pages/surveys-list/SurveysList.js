@@ -16,6 +16,7 @@ import {
   fetchSurveysRequest,
   fetchSurveysSuccess,
   fetchSurveysFailure,
+  setCurrentSelectedSurvey,
 } from '../../store/actions/actions';
 import './SurveysList.scss';
 
@@ -26,8 +27,8 @@ const SurveysList = ({ history }) => {
 
   //route to survey detail page
   const onSurveySelect = useCallback(
-    surveyId => {
-      debugger;
+    (surveyId, title) => {
+      dispatch(setCurrentSelectedSurvey({ id: surveyId, title }));
       history.push(`/surveys/${surveyId}`);
     },
     [dispatch, history]
@@ -45,7 +46,7 @@ const SurveysList = ({ history }) => {
     });
   };
 
-  // loads once the components mounted, and make request to fetch survey questions
+  // loads once the components mounted, and make request to fetch available survey
   useEffect(() => {
     if (isEmpty(availableSurveys)) {
       dispatch(fetchSurveysRequest());
@@ -53,32 +54,31 @@ const SurveysList = ({ history }) => {
     }
   }, []);
   return (
-    <>
-      <BaseLayout headerTitle="The Survey App">
-        <BaseHeading level="h4" theme="dark">
-          Available surveys
-        </BaseHeading>
-        <div className="surveys_list_container">
-          {surveysLoading || isEmpty(availableSurveys) ? (
-            <p>loading...</p>
-          ) : (
-            <div className="questions_container">
-              {availableSurveys.map(({ id, title, tagline }) => {
-                return (
-                  <div
-                    className="question"
-                    key={uniqueId(id)}
-                    onClick={() => onSurveySelect(id)}>
-                    <p>{title}</p>
-                    <p>{tagline}</p>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </BaseLayout>
-    </>
+    <BaseLayout headerTitle="The Survey App">
+      <BaseHeading level="h4" theme="dark">
+        Available surveys
+      </BaseHeading>
+      <div className="app-hz-line"></div>
+      <div className="surveys_list_container">
+        {surveysLoading || isEmpty(availableSurveys) ? (
+          <p>loading...</p>
+        ) : (
+          <div className="questions_container">
+            {availableSurveys.map(({ id, title, tagline }) => {
+              return (
+                <div
+                  className="question"
+                  key={uniqueId(id)}
+                  onClick={() => onSurveySelect(id, title)}>
+                  <p>{title}</p>
+                  <p>{tagline}</p>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </BaseLayout>
   );
 };
 

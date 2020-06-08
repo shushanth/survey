@@ -9,6 +9,7 @@ describe('appReducer', () => {
       surveysFetching: false,
       surveysError: false,
       surveys: [],
+      currentSelectedSurvey: { id: '', value: '' },
     };
     mockRootState = getMockSurveys();
   });
@@ -47,5 +48,19 @@ describe('appReducer', () => {
       surveys: [],
     };
     expect(expectResult).toEqual(fetchSurveysFailure);
+  });
+
+  it('should handle action SET_CURRENT_SELECTED_SURVEY', () => {
+    const setCurrentSelectedSurvey = appReducer(rootState, {
+      type: 'SET_CURRENT_SELECTED_SURVEY',
+      payload: { id: '002', title: 'This is about Politics' },
+    });
+    const expectResult = {
+      surveysFetching: false,
+      surveysError: false,
+      surveys: [],
+      currentSelectedSurvey: { id: '002', title: 'This is about Politics' },
+    };
+    expect(expectResult).toEqual(setCurrentSelectedSurvey);
   });
 });
