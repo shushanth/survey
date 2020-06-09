@@ -1,0 +1,17 @@
+@import '../../assets/styles/mixins.scss';
+@import '../../assets/styles/variables';
+
+.survey_question_form {
+  .survey_question {
+    margin: 0.75rem 0;
+    @include styles-flex(column);
+
+    .title {
+      margin: 0.5rem 0;
+    }
+  }
+
+  .question_options {
+    // @include styles-flex();
+  }
+}

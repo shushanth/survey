@@ -15,6 +15,9 @@ const BaseHeading = memo(({ level, theme = 'default', children }) => {
       {level === 'h2' && (
         <h2 className={`headings headings-theme--${theme}`}>{children}</h2>
       )}
+      {level === 'h3' && (
+        <h3 className={`headings headings-theme--${theme}`}>{children}</h3>
+      )}
       {level === 'h4' && (
         <h4 className={`headings headings-theme--${theme}`}>{children}</h4>
       )}
@@ -28,7 +31,7 @@ BaseHeading.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-  ]).isRequired,
+  ]),
 };
 
 export default BaseHeading;

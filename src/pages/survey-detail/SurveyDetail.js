@@ -6,10 +6,12 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty, uniqueId } from 'lodash';
+import { isEmpty } from 'lodash';
+import { useParams } from 'react-router-dom';
 
 import { httpService } from '../../api/httpService';
 import { BaseLayout, BaseHeading } from '../../shared/components';
+import SurveyQuestionForm from '../../components/survey-form/SurveyQuestionForm';
 import {
   fetchSurveyQuestionsRequest,
   fetchSurveyQuestionsSuccess,
@@ -19,11 +21,12 @@ import './SurveyDetail.scss';
 
 const SurveyDetail = () => {
   const dispatch = useDispatch();
-  const selectedSurvey = useSelector(state => state.currentSelectedSurvey);
+  const { surveyId } = useParams();
 
+  const selectedSurvey = useSelector(state => state.currentSelectedSurvey);
   const requestSelectedQuestions = () => {
     httpService.request({
-      url: `/surveys/${selectedSurvey.id}`,
+      url: `/surveys/${selectedSurvey.id || surveyId}`,
       onSuccess: result => {
         dispatch(fetchSurveyQuestionsSuccess(result));
       },
@@ -33,21 +36,30 @@ const SurveyDetail = () => {
     });
   };
 
-  console.log(selectedSurvey.questions);
+  const areQuestionsAvailable = () => !isEmpty(selectedSurvey.questions);
+
   // loads once the components mounted, and make request to fetch selected survey questions
   useEffect(() => {
-    if (isEmpty(selectedSurvey.questions)) {
+    if (areQuestionsAvailable) {
       dispatch(fetchSurveyQuestionsRequest());
       requestSelectedQuestions();
     }
   }, []);
+
   return (
     <BaseLayout headerTitle="The Survey App">
-      <BaseHeading level="h4" theme="dark">
+      <BaseHeading level="h3" theme="dark">
         Complete questions of the survey
       </BaseHeading>
       <div className="app-hz-line"></div>
-      <p className="selected_survey">{selectedSurvey.title}</p>
+      <BaseHeading level="h4" theme="dark" className="selected_survey">
+        {selectedSurvey.title}
+      </BaseHeading>
+      {!areQuestionsAvailable() ? (
+        <p>loading...</p>
+      ) : (
+        <SurveyQuestionForm questions={selectedSurvey.questions} />
+      )}
     </BaseLayout>
   );
 };
