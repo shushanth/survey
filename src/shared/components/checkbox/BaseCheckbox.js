@@ -10,6 +10,7 @@
 
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { uniqueId } from 'lodash';
 
 import './BaseCheckbox.scss';
 
@@ -18,11 +19,11 @@ const BaseCheckbox = memo(({ id, label, selected, onSelect }) => {
     <div className="checkbox_container">
       <input
         type="checkbox"
-        id={`${(id, label)}`}
+        id={id}
         checked={selected}
         onChange={() => onSelect(id)}
       />
-      <label htmlFor={`${(id, label)}`}>
+      <label htmlFor={id}>
         <span className="label_title">{label}</span>
       </label>
     </div>

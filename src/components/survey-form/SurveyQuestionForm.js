@@ -77,6 +77,7 @@ const SurveyQuestionForm = memo(({ questions }) => {
   };
   const onFormSubmit = () => {
     console.log('form submit');
+    console.log(formQuestions);
   };
   return (
     <>
