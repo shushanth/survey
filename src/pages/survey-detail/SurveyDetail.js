@@ -52,9 +52,11 @@ const SurveyDetail = () => {
         Complete questions of the survey
       </BaseHeading>
       <div className="app-hz-line"></div>
-      <BaseHeading level="h4" theme="dark" className="selected_survey">
-        {selectedSurvey.title}
-      </BaseHeading>
+      <div className="selected_survey">
+        <BaseHeading level="h4" theme="dark">
+          {selectedSurvey.title}
+        </BaseHeading>
+      </div>
       {!areQuestionsAvailable() ? (
         <p>loading...</p>
       ) : (

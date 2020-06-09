@@ -8,17 +8,21 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 
-import { BaseCheckbox } from '../../shared/components';
+import { BaseCheckbox, BaseButton } from '../../shared/components';
 import './SurveyQuestionForm.scss';
 
 const SurveyQuestionForm = memo(({ questions }) => {
+  const onFormSubmit = () => {
+    console.log('btn sumbit');
+  };
+
   //render jsx of questions and its form with required input form elements
   const renderQuestionForm = () => {
     return questions.map(({ id, title, options }) => {
       return (
         <div key={uniqueId(id)} className="survey_question">
-          <div className="title">
-            <p>{title}</p>
+          <div className="title_container">
+            <p className="title">{title}</p>
           </div>
           <div className="question_options">
             {options.map(option => {
@@ -36,7 +40,13 @@ const SurveyQuestionForm = memo(({ questions }) => {
       );
     });
   };
-  return <div className="survey_question_form">{renderQuestionForm()}</div>;
+  return (
+    <>
+      <div className="survey_question_form">{renderQuestionForm()}</div>
+
+      <BaseButton title="Submit" onBtnClick={onFormSubmit} />
+    </>
+  );
 });
 
 SurveyQuestionForm.propTypes = {

@@ -6,12 +6,12 @@
     margin: 0.75rem 0;
     @include styles-flex(column);
 
-    .title {
+    .title_container {
       margin: 0.5rem 0;
-    }
-  }
 
-  .question_options {
-    // @include styles-flex();
+      .title {
+        font-size: .85rem;
+      }
+    }
   }
 }
