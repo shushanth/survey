@@ -12,7 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const BaseButton = ({ title, level, size, onBtnClick }) => {
+const BaseButton = ({ title, level, size, onBtnClick, disabled }) => {
   return (
     <div className="button_container">
       <button
@@ -22,6 +22,9 @@ const BaseButton = ({ title, level, size, onBtnClick }) => {
           },
           {
             'btn_size--default': size === 'default',
+          },
+          {
+            'btn btn_disabled': disabled,
           }
         )}
         onClick={onBtnClick}>
@@ -35,6 +38,7 @@ BaseButton.defaultProps = {
   title: 'button',
   level: 'primary',
   size: 'default',
+  disabled: false,
   onBtnClick: () => {},
 };
 
@@ -42,6 +46,7 @@ BaseButton.propTypes = {
   title: PropTypes.string.isRequired,
   level: PropTypes.string,
   size: PropTypes.string,
+  disabled: PropTypes.bool,
   onBtnClick: PropTypes.func,
 };
 

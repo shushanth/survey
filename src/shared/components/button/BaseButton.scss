@@ -8,6 +8,11 @@
     outline: 0;
     font-weight: bold;
 
+    &_disabled {
+      pointer-events: none !important;
+      background-color: $styles-color-gray-dull !important; 
+    }
+
     &_level--primary {
       color: #fff;
       background-color: $styles-color-blue--cloud;

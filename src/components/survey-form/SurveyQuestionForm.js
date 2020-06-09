@@ -4,7 +4,7 @@
  * @props: 1. questions
  */
 
-import React, { memo } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 
@@ -12,13 +12,47 @@ import { BaseCheckbox, BaseButton } from '../../shared/components';
 import './SurveyQuestionForm.scss';
 
 const SurveyQuestionForm = memo(({ questions }) => {
-  const onFormSubmit = () => {
-    console.log('btn sumbit');
+  const [formQuestions, setFormQuestions] = useState(questions);
+  const [isFormDirty, setFormDirty] = useState(false);
+
+  useEffect(() => {
+    const updatedFormOptions = formQuestions.map(question => {
+      const updatedOptions = question.options.map(option => ({
+        id: uniqueId(),
+        selected: false,
+        value: option,
+      }));
+      return { ...question, options: updatedOptions };
+    });
+    setFormQuestions(updatedFormOptions);
+  }, []);
+
+  const onQuestionSelect = (selectedId, questionId) => {
+    const updatedQuestion = formQuestions
+      .filter(({ id }) => id === questionId)
+      .pop();
+    const updatedQuestionOption = {
+      ...updatedQuestion,
+      options: updatedQuestion.options.map(({ id, selected, value }) => {
+        if (selectedId === id) {
+          return { id, selected: !selected, value };
+        }
+        return { id, selected, value };
+      }),
+    };
+    const updatedFormQuestions = formQuestions.map(formQuestion => {
+      if (formQuestion.id === questionId) {
+        return updatedQuestionOption;
+      }
+      return formQuestion;
+    });
+    setFormDirty(true);
+    setFormQuestions(updatedFormQuestions);
   };
 
   //render jsx of questions and its form with required input form elements
   const renderQuestionForm = () => {
-    return questions.map(({ id, title, options }) => {
+    return formQuestions.map(({ id, title, options }) => {
       return (
         <div key={uniqueId(id)} className="survey_question">
           <div className="title_container">
@@ -29,9 +63,10 @@ const SurveyQuestionForm = memo(({ questions }) => {
               return (
                 <BaseCheckbox
                   key={uniqueId(id)}
-                  id={id}
-                  isSelected={false}
-                  label={option}
+                  id={option.id}
+                  label={option.value}
+                  selected={option.selected}
+                  onSelect={selectedId => onQuestionSelect(selectedId, id)}
                 />
               );
             })}
@@ -40,11 +75,17 @@ const SurveyQuestionForm = memo(({ questions }) => {
       );
     });
   };
+  const onFormSubmit = () => {
+    console.log('form submit');
+  };
   return (
     <>
-      <div className="survey_question_form">{renderQuestionForm()}</div>
-
-      <BaseButton title="Submit" onBtnClick={onFormSubmit} />
+      {<div className="survey_question_form">{renderQuestionForm()}</div>}
+      <BaseButton
+        disabled={!isFormDirty}
+        title="Submit"
+        onBtnClick={onFormSubmit}
+      />
     </>
   );
 });
