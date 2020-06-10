@@ -16,7 +16,7 @@
       border-radius: 5px;
 
       &:hover {
-        background: $styles-color-gray-dull;
+        background: $styles-color-white-whale;
       }
 
       &_title {
@@ -25,11 +25,12 @@
         padding-right: 1rem;
         font-weight: bold;
         letter-spacing: 0.07rem;
-        color: #383333;
+        color: $styles-color-black-gray;
         @include styles-text-overflow(ellipsis);
       }
 
       &_tagline {
+        color: $styles-color-cement-gray;
         flex: 2;
         @include styles-text-overflow(ellipsis);
       }
