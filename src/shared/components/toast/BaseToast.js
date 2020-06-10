@@ -6,7 +6,7 @@
  *  2. msg, message to be displayed.
  *  3. level, toast entity information success, warning.
  *  4. afterClose, callback function which invokes after close of toast.
- *  5. offset, time until which toast would be displayed.
+ *  5. offset, time in seconds until which toast would be displayed.
  * */
 
 import React, { memo, useState, useEffect } from 'react';

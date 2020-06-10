@@ -18,6 +18,7 @@ import {
 } from '../actions/actionTypes';
 
 import rootState from './rootState';
+import { getUpdatedCompletedSurveys } from './helpers';
 
 const reducer = (state = rootState, { type, payload }) => {
   switch (type) {
@@ -95,11 +96,12 @@ const reducer = (state = rootState, { type, payload }) => {
 
     case POST_SURVEY_SUCCESS: {
       const { status, action, survey_id } = payload;
-      //TODO: move this to helpers
-      const completedSurveys =
-        status === 'ok' && action === 'completion'
-          ? [...state.completedSurveys, survey_id]
-          : [...state.completedSurveys];
+      const completedSurveys = getUpdatedCompletedSurveys(
+        status,
+        action,
+        state.completedSurveys,
+        survey_id
+      );
       return {
         ...state,
         surveyPostSuccess: true,

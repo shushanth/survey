@@ -24,15 +24,7 @@ const SurveysList = ({ history }) => {
   const dispatch = useDispatch();
   const surveysLoading = useSelector(state => state.questionsFetching);
   const availableSurveys = useSelector(state => state.surveys);
-
-  //route to survey detail page
-  const onSurveySelect = useCallback(
-    (surveyId, title) => {
-      dispatch(setCurrentSelectedSurvey({ id: surveyId, title }));
-      history.push(`/surveys/${surveyId}`);
-    },
-    [dispatch, history]
-  );
+  const completedSurveys = useSelector(state => state.completedSurveys);
 
   const requestQuestions = () => {
     httpService.request({
@@ -46,6 +38,17 @@ const SurveysList = ({ history }) => {
     });
   };
 
+  const isSurveyCompleted = surveyID => completedSurveys.includes(surveyID);
+
+  //route to survey detail page
+  const onSurveySelect = useCallback(
+    (surveyId, title) => {
+      dispatch(setCurrentSelectedSurvey({ id: surveyId, title }));
+      history.push(`/surveys/${surveyId}`);
+    },
+    [dispatch, history]
+  );
+
   // loads once the components mounted, and make request to fetch available survey
   useEffect(() => {
     if (isEmpty(availableSurveys)) {
@@ -53,6 +56,7 @@ const SurveysList = ({ history }) => {
       requestQuestions();
     }
   }, []);
+
   return (
     <BaseLayout headerTitle="The Survey App">
       <BaseHeading level="h4" theme="dark">
@@ -69,9 +73,14 @@ const SurveysList = ({ history }) => {
                 <div
                   className="question"
                   key={uniqueId(id)}
-                  onClick={() => onSurveySelect(id, title)}>
-                  <p>{title}</p>
-                  <p>{tagline}</p>
+                  onClick={() =>
+                    !isSurveyCompleted(id) && onSurveySelect(id, title)
+                  }>
+                  <p className="question_title">{title}</p>
+                  <p className="question_tagline">{tagline}</p>
+                  {isSurveyCompleted(id) && (
+                    <p className="survey_completed">Done</p>
+                  )}
                 </div>
               );
             })}

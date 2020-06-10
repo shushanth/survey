@@ -18,7 +18,8 @@
       &:hover {
         background: $styles-color-gray-dull;
       }
-      p:first-child {
+
+      &_title {
         flex: none;
         flex-basis: 10rem;
         padding-right: 1rem;
@@ -28,9 +29,15 @@
         @include styles-text-overflow(ellipsis);
       }
 
-      p:last-child {
+      &_tagline {
         flex: 2;
         @include styles-text-overflow(ellipsis);
+      }
+
+      .survey_completed {
+        color: $styles-color-green--low;
+        font-weight: bold;
+        padding: 0 1rem;
       }
     }
   }

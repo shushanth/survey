@@ -1,7 +1,6 @@
 /**
  * @name: SurveyDetail
  * @desc container component for the survey detail page
- *
  */
 
 import React, { useEffect, useState, useCallback } from 'react';
@@ -19,6 +18,7 @@ import {
   fetchSurveyQuestionsFailure,
   postSurveyRequest,
   postSurveySuccess,
+  postSurveyFailure,
 } from '../../store/actions/actions';
 import './SurveyDetail.scss';
 
@@ -48,15 +48,16 @@ const SurveyDetail = ({ history }) => {
    * success message and redirecting to available survey page.
    */
   const feedbackCompletion = feedbackObtained => {
+    const surveyID = selectedSurvey.id || surveyId;
     httpService.request({
       method: 'POST',
-      url: `/surveys/${selectedSurvey.id}/completions`,
+      url: `/surveys/${surveyID}/completions`,
       data: feedbackObtained,
       onSuccess: result => {
         dispatch(postSurveySuccess(result));
       },
       onFailure: error => {
-        dispatch(postSurveySuccess());
+        dispatch(postSurveyFailure(error));
       },
     });
   };
@@ -70,7 +71,7 @@ const SurveyDetail = ({ history }) => {
     dispatch(postSurveyRequest());
   };
 
-  // loads once the components mounted, and make request to fetch selected survey questions
+  // loads only once the components mounted, and make request to fetch selected survey questions
   useEffect(() => {
     if (areQuestionsAvailable) {
       dispatch(fetchSurveyQuestionsRequest());
@@ -100,6 +101,7 @@ const SurveyDetail = ({ history }) => {
           id="formSuccessFull"
           msg="Thank you for the feedback"
           level="success"
+          offset={3}
           afterClose={redirectToAvailableSurveys}
         />
       )}

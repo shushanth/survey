@@ -58,4 +58,5 @@ export {
   setCurrentSelectedSurvey,
   postSurveyRequest,
   postSurveySuccess,
+  postSurveyFailure,
 };
