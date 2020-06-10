@@ -10,7 +10,6 @@
 
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { uniqueId } from 'lodash';
 
 import './BaseCheckbox.scss';
 
@@ -19,6 +18,7 @@ const BaseCheckbox = memo(({ id, label, selected, onSelect }) => {
     <div className="checkbox_container">
       <input
         type="checkbox"
+        aria-label="checkbox-element"
         id={id}
         checked={selected}
         onChange={() => onSelect(id)}

@@ -1,7 +1,8 @@
 /**
  * @name: SurveyQuestionForm
  * @desc form component for the survey questions
- * @props: 1. questions
+ * @props: 1. questions, which gets displayed in the form .
+ *  2.onSurveyComplete, callback function which invokes with form updated answers/feedback.
  */
 
 import React, { memo, useState, useEffect } from 'react';
@@ -11,9 +12,16 @@ import { uniqueId } from 'lodash';
 import { BaseCheckbox, BaseButton } from '../../shared/components';
 import './SurveyQuestionForm.scss';
 
-const SurveyQuestionForm = memo(({ questions }) => {
+const SurveyQuestionForm = memo(({ questions, onSurveyComplete }) => {
   const [formQuestions, setFormQuestions] = useState(questions);
   const [isFormDirty, setFormDirty] = useState(false);
+
+  /**
+   *
+   * sets the form questions, when the component gets mounted
+   * question data gets set and passed checkbox based on the
+   * each question options
+   */
 
   useEffect(() => {
     const updatedFormOptions = formQuestions.map(question => {
@@ -28,16 +36,18 @@ const SurveyQuestionForm = memo(({ questions }) => {
   }, []);
 
   const onQuestionSelect = (selectedId, questionId) => {
-    const updatedQuestion = formQuestions
+    let updatedQuestion = formQuestions
       .filter(({ id }) => id === questionId)
       .pop();
+
+    //make earlier selection false as only one value can be selected
     const updatedQuestionOption = {
       ...updatedQuestion,
       options: updatedQuestion.options.map(({ id, selected, value }) => {
         if (selectedId === id) {
           return { id, selected: !selected, value };
         }
-        return { id, selected, value };
+        return { id, selected: false, value };
       }),
     };
     const updatedFormQuestions = formQuestions.map(formQuestion => {
@@ -75,9 +85,17 @@ const SurveyQuestionForm = memo(({ questions }) => {
       );
     });
   };
+
   const onFormSubmit = () => {
-    console.log('form submit');
-    console.log(formQuestions);
+    let completedFormValues = [];
+    formQuestions.map(formQuestion => {
+      formQuestion.options.map(({ selected, value }) => {
+        if (selected) {
+          completedFormValues.push({ question_id: formQuestion.id, value });
+        }
+      });
+    });
+    onSurveyComplete(completedFormValues);
   };
   return (
     <>
@@ -93,6 +111,12 @@ const SurveyQuestionForm = memo(({ questions }) => {
 
 SurveyQuestionForm.propTypes = {
   questions: PropTypes.array,
+  onSurveyComplete: PropTypes.func,
+};
+
+SurveyQuestionForm.defaultProps = {
+  questions: [],
+  onSurveyComplete: () => {},
 };
 
 export default SurveyQuestionForm;

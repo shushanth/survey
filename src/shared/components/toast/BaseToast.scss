@@ -1,0 +1,25 @@
+@import '../../../assets/styles/variables.scss';
+@import '../../../assets/styles/mixins';
+
+.toast {
+  @include styles-flex();
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  opacity: 0.85;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+
+  &--success {
+    background: $styles-color-green--low;
+  }
+
+  &_msg {
+    color: #fff;
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}

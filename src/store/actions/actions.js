@@ -6,6 +6,9 @@ import {
   FETCH_SURVEY_QUESTIONS_REQUEST,
   FETCH_SURVEY_QUESTIONS_SUCCESS,
   FETCH_SURVEY_QUESTIONS_FAILURE,
+  POST_SURVEY_REQUEST,
+  POST_SURVEY_SUCCESS,
+  POST_SURVEY_FAILURE,
 } from './actionTypes';
 
 const fetchSurveysRequest = () => ({ type: FETCH_SURVEYS_REQUEST });
@@ -39,6 +42,12 @@ const fetchSurveyQuestionsFailure = payload => ({
   payload,
 });
 
+const postSurveyRequest = () => ({ type: POST_SURVEY_REQUEST });
+
+const postSurveySuccess = payload => ({ type: POST_SURVEY_SUCCESS, payload });
+
+const postSurveyFailure = payload => ({ type: POST_SURVEY_FAILURE, payload });
+
 export {
   fetchSurveysRequest,
   fetchSurveysSuccess,
@@ -47,4 +56,6 @@ export {
   fetchSurveyQuestionsSuccess,
   fetchSurveyQuestionsFailure,
   setCurrentSelectedSurvey,
+  postSurveyRequest,
+  postSurveySuccess,
 };

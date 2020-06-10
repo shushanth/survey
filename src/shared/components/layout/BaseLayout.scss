@@ -6,6 +6,7 @@
     margin: 0 auto;
     padding: 2rem;
     width: 50rem;
+    min-height: 100vh;
     @include styles-flex(column);
     @include styles-box-shadow();
   }

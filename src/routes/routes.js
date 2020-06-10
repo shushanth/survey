@@ -14,7 +14,11 @@ const AppRoutes = () => {
         path="/surveys"
         component={() => <SurveysList history={history} />}
       />
-      <Route exact path="/surveys/:surveyId" component={SurveyDetail} />
+      <Route
+        exact
+        path="/surveys/:surveyId"
+        component={() => <SurveyDetail history={history} />}
+      />
       <Route exact path="/" render={() => <Redirect to="/surveys" />} />
     </Router>
   );

@@ -4,16 +4,23 @@ const BASE_URL = 'https://private-5fb3f-surveysmock.apiary-mock.com/api';
 
 export const apiService = request => {
   const { method, url } = request;
+  const handleSuccessError = (response, { onSuccess, onFailure }) => {
+    try {
+      const { data } = response;
+      onSuccess(data);
+    } catch (error) {
+      onFailure(error);
+    }
+  };
+
   const httpRequestConfig = {
     GET: async config => {
-      const { onSuccess, onFailure } = config;
-      try {
-        const response = await axios.get(`${BASE_URL}${url}`);
-        const { data } = response;
-        onSuccess(data);
-      } catch (error) {
-        onFailure(error);
-      }
+      const response = await axios.get(`${BASE_URL}${url}`);
+      handleSuccessError(response, config);
+    },
+    POST: async config => {
+      const response = await axios.post(`${BASE_URL}${url}`, config.data);
+      handleSuccessError(response, config);
     },
   };
   return {

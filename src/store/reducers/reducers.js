@@ -12,6 +12,9 @@ import {
   FETCH_SURVEY_QUESTIONS_REQUEST,
   FETCH_SURVEY_QUESTIONS_SUCCESS,
   FETCH_SURVEY_QUESTIONS_FAILURE,
+  POST_SURVEY_REQUEST,
+  POST_SURVEY_SUCCESS,
+  POST_SURVEY_FAILURE,
 } from '../actions/actionTypes';
 
 import rootState from './rootState';
@@ -79,6 +82,40 @@ const reducer = (state = rootState, { type, payload }) => {
         ...state,
         surveyQuestionsFetching: false,
         surveyQuestionsError: true,
+      };
+    }
+
+    case POST_SURVEY_REQUEST: {
+      return {
+        ...state,
+        surveyPostRequested: true,
+        surveyPostSuccess: false,
+        surveyPostFailure: false,
+      };
+    }
+
+    case POST_SURVEY_SUCCESS: {
+      const { status, action, survey_id } = payload;
+      //TODO: move this to helpers
+      const completedSurveys =
+        status === 'ok' && action === 'completion'
+          ? [...state.completedSurveys, survey_id]
+          : [...state.completedSurveys];
+      return {
+        ...state,
+        surveyPostRequested: false,
+        surveyPostSuccess: true,
+        surveyPostFailure: false,
+        completedSurveys,
+      };
+    }
+
+    case POST_SURVEY_FAILURE: {
+      return {
+        ...state,
+        surveyPostFailure: true,
+        surveyPostRequested: false,
+        surveyPostSuccess: false,
       };
     }
 
