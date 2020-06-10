@@ -12,7 +12,6 @@ const rootState = {
   surveysError: false,
   surveyQuestionsFetching: false,
   surveyQuestionsError: false,
-  surveyPostRequested: false,
   surveyPostSuccess: false,
   surveyPostFailure: false,
   surveys: [],

@@ -27,7 +27,6 @@ const SurveyDetail = ({ history }) => {
   const { surveyId } = useParams();
   const [isSurveyCompleted, setIsSurveyCompleted] = useState(false);
   const selectedSurvey = useSelector(state => state.currentSelectedSurvey);
-  const isSurveyPosting = useSelector(state => state.surveyPostRequested);
   const isSurveyPostSuccess = useSelector(state => state.surveyPostSuccess);
 
   const areQuestionsAvailable = () => !isEmpty(selectedSurvey.questions);

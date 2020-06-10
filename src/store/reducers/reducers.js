@@ -88,7 +88,6 @@ const reducer = (state = rootState, { type, payload }) => {
     case POST_SURVEY_REQUEST: {
       return {
         ...state,
-        surveyPostRequested: true,
         surveyPostSuccess: false,
         surveyPostFailure: false,
       };
@@ -103,7 +102,6 @@ const reducer = (state = rootState, { type, payload }) => {
           : [...state.completedSurveys];
       return {
         ...state,
-        surveyPostRequested: false,
         surveyPostSuccess: true,
         surveyPostFailure: false,
         completedSurveys,
@@ -114,7 +112,6 @@ const reducer = (state = rootState, { type, payload }) => {
       return {
         ...state,
         surveyPostFailure: true,
-        surveyPostRequested: false,
         surveyPostSuccess: false,
       };
     }
