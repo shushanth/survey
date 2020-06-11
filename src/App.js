@@ -2,8 +2,9 @@
  * @name App
  * @desc handles app routes in the app
  *
- * App has one level of route
- * 1. /questions is home route of the app.
+ * App has two level of route
+ * 1. /surveys is home route of the app. which displays available surveys
+ * 2. /surveys/surveyId, which displays questions form and survey detail of the selected survey.
  */
 
 import React from 'react';
