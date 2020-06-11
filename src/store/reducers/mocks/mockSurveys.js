@@ -28,3 +28,9 @@ export const getMockSurveys = () => {
   ];
   return surveys;
 };
+
+export const getPostSurveys = () => {
+  return [
+    { question_id: 'Q6eb198', value: 'Both offer amazing and delicious food!' },
+  ];
+};

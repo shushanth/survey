@@ -28,7 +28,7 @@ const setCurrentSelectedSurvey = payload => ({
   payload,
 });
 
-const fetchSurveyQuestionsRequest = payload => ({
+const fetchSurveyQuestionsRequest = () => ({
   type: FETCH_SURVEY_QUESTIONS_REQUEST,
 });
 

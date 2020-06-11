@@ -62,6 +62,8 @@ const reducer = (state = rootState, { type, payload }) => {
         ...state,
         surveyQuestionsFetching: true,
         surveyQuestionsError: false,
+        surveyPostSuccess: false,
+        surveyPostFailure: false,
       };
     }
 

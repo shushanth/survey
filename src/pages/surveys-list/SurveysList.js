@@ -59,7 +59,7 @@ const SurveysList = ({ history }) => {
 
   return (
     <BaseLayout headerTitle="The Survey App">
-      <BaseHeading level="h4" theme="dark">
+      <BaseHeading level="h3" theme="dark">
         Available surveys
       </BaseHeading>
       <div className="app-hz-line"></div>

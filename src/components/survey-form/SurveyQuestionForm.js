@@ -17,7 +17,7 @@ const SurveyQuestionForm = memo(({ questions, onSurveyComplete }) => {
   const [isFormDirty, setFormDirty] = useState(false);
 
   /**
-   *
+   * loads only once the component gets mounted
    * sets the form questions, when the component gets mounted
    * question data gets set and passed checkbox based on the
    * each question options

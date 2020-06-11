@@ -9,9 +9,10 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 
+import SurveyQuestionForm from '../../components/survey-form/SurveyQuestionForm';
 import { httpService } from '../../api/httpService';
 import { BaseLayout, BaseHeading, BaseToast } from '../../shared/components';
-import SurveyQuestionForm from '../../components/survey-form/SurveyQuestionForm';
+import { moveScrollTop } from '../../shared/utils/utilities';
 import {
   fetchSurveyQuestionsRequest,
   fetchSurveyQuestionsSuccess,
@@ -62,14 +63,10 @@ const SurveyDetail = ({ history }) => {
     });
   };
 
-  const handlePostSurvey = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
+  const handlePostSurvey = useCallback(() => {
+    moveScrollTop();
     dispatch(postSurveyRequest());
-  };
+  }, [dispatch]);
 
   // loads only once the components mounted, and make request to fetch selected survey questions
   useEffect(() => {
@@ -83,16 +80,14 @@ const SurveyDetail = ({ history }) => {
     if (isSurveyCompleted) {
       handlePostSurvey();
     }
-  }, [isSurveyCompleted]);
+  }, [isSurveyCompleted, handlePostSurvey]);
+
+  const redirectToAvailableSurveys = () => history.push(`/surveys/`);
 
   const onSurveyDone = surveyFeedback => {
     setIsSurveyCompleted(true);
     feedbackCompletion(surveyFeedback);
   };
-
-  const redirectToAvailableSurveys = useCallback(() => {
-    history.push(`/surveys/`);
-  }, [history]);
 
   return (
     <BaseLayout headerTitle="The Survey App">

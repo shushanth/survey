@@ -3,8 +3,11 @@ import {
   fetchSurveysSuccess,
   fetchSurveysFailure,
   setCurrentSelectedSurvey,
+  postSurveyRequest,
+  postSurveySuccess,
+  postSurveyFailure,
 } from './actions';
-import { getMockSurveys } from '../reducers/mocks/mockSurveys';
+import { getMockSurveys, getPostSurveys } from '../reducers/mocks/mockSurveys';
 
 describe('actions', () => {
   let mockFetchSurveys = [];
@@ -45,5 +48,30 @@ describe('actions', () => {
     expect(
       setCurrentSelectedSurvey({ id: '002', title: 'This is about Politics' })
     ).toEqual(expectedAction);
+  });
+
+  it('should create action to post surveys request', () => {
+    const expectedAction = {
+      type: 'POST_SURVEY_REQUEST',
+    };
+    expect(postSurveyRequest()).toEqual(expectedAction);
+  });
+
+  it('should create action to post surveys success', () => {
+    const expectedAction = {
+      type: 'POST_SURVEY_SUCCESS',
+      payload: getPostSurveys(),
+    };
+    expect(postSurveySuccess(getPostSurveys())).toEqual(expectedAction);
+  });
+
+  it('should create action to fetch surveys request', () => {
+    const expectedAction = {
+      type: 'POST_SURVEY_FAILURE',
+      payload: { error: 'something went wrong' },
+    };
+    expect(postSurveyFailure({ error: 'something went wrong' })).toEqual(
+      expectedAction
+    );
   });
 });

@@ -18,16 +18,14 @@ import './BaseToast.scss';
 const BaseToast = memo(({ id, msg, level, offset, afterClose }) => {
   const [isToastDisplayed, setIsToastDisplayed] = useState(true);
 
-  const handleToastClose = () => {
+  useEffect(() => {
     const timer = setTimeout(() => {
       setIsToastDisplayed(false);
-      afterClose();
+      afterClose(id);
     }, offset * 1000);
     return () => clearTimeout(timer);
-  };
-  useEffect(() => {
-    handleToastClose(id);
-  }, []);
+  }, [afterClose, offset]);
+
   return (
     isToastDisplayed && (
       <div
