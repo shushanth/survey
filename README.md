@@ -42,7 +42,7 @@ Surveys app consists of the two routes and uses routing in the app to route to s
     2. _Survey Detail_:  This page is navigated from survey list page on select of any individual survey row and display the questions of the selected survey. On successful submission of the survey success toast message is been displayed and after some seconds gets redirect back to survey list page.
 
 #### Implementations
--  Implemented surveys form and ui layer components (button, layout, checkbox ..etc) with hooks.
+-  Implemented surveys form and ui layer components (button, layout, checkbox ..etc) with hooks (using latest react 16+ version as the application is developed from scratch).
 -  Added _redux_ as state container and uses hooks to dispatch actions and get the state
 -  Added unit tests , uses _react testing library_ .
 -  Uses sass for styles with its required functionalities. 
