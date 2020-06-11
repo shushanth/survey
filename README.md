@@ -38,7 +38,7 @@ Surveys app consists of the two routes and uses routing in the app to route to s
 - Survey list and survey details page 
      1. _Surveys List_ : This page acts a container component which manages the state required for available surveys. 
      Displays available surveys in list format on select of the surveys, redirect to survey detail page. 
-     Each survey row displays title and tagline of the survey . Informs status of the survey is it completed or not, as of now displays status for `001` survey id as the api provides the completed status only for `001`.
+     Each survey row displays title and tagline of the survey . Informs status of the survey is it completed or not, as of now displays status for _001_ survey id as the api provides the completed status only for _001_.
     2. _Survey Detail_:  This page is navigated from survey list page on select of any individual survey row and display the questions of the selected survey. On successful submission of the survey success toast message is been displayed and after some seconds gets redirect back to survey list page.
 
 #### Implementations
