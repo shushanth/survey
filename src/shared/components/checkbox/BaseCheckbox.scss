@@ -31,23 +31,31 @@
 
   [type='checkbox']:not(:checked) + label:after,
   [type='checkbox']:checked + label:after {
-    content: '\2714\0020';
-    position: absolute;
-    top: 0.15rem;
-    left: 0.22rem;
-    font-size: 0.9rem;
-    line-height: 1;
+    content: '\2588\0020';
     color: $styles-color-green--low;
+    position: absolute;
+    top: .1rem;
+    left: .2rem;
+    font-size: .8rem;
     transition: all 0.2s;
     font-weight: bold;
+    border-radius: 50%;
   }
   [type='checkbox']:not(:checked) + label:after {
     opacity: 0;
     transform: scale(0);
+    transition: all 0.2s;
   }
   [type='checkbox']:checked + label:after {
     opacity: 1;
+    transform: scale(.8);
+    transition: all 0.2s;
+  }
+
+  [type='checkbox']:checked + label:before {
+    opacity: 1;
     transform: scale(1);
+    border: 2px solid $styles-color-green--low;
   }
   .label_title {
     top: 0.15rem;
