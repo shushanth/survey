@@ -69,13 +69,14 @@ const reducer = (state = rootState, { type, payload }) => {
 
     case FETCH_SURVEY_QUESTIONS_SUCCESS: {
       const {
-        survey: { questions },
+        survey: { id, title, questions },
       } = payload;
       return {
         ...state,
         currentSelectedSurvey: {
-          ...state.currentSelectedSurvey,
           questions,
+          title,
+          id,
         },
       };
     }

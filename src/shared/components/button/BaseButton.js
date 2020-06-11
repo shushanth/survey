@@ -6,11 +6,11 @@
  *   3. level , primary, .. different button themes and colors to apply for button
  * */
 
-import './BaseButton.scss';
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
+import './BaseButton.scss';
 
 const BaseButton = ({ title, level, size, onBtnClick, disabled }) => {
   return (

@@ -1,0 +1,9 @@
+@import '../../../assets/styles/mixins.scss';
+
+.loading_container {
+  @include styles-flex();
+  
+  .loading_message {
+    font-size: 1rem;
+  }
+}

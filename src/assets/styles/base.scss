@@ -22,7 +22,6 @@ html,
 body,
 div,
 span,
-iframe,
 h1,
 h2,
 h3,
@@ -35,47 +34,20 @@ a {
   position: relative;
 }
 
-li,
-ol {
-  list-style: none !important;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-button,
-input,
-optgroup,
-select,
-textarea {
+button {
   font-family: inherit;
   font-size: 100%;
   line-height: 1.15;
   margin: 0;
-}
-
-button,
-input {
   overflow: visible;
-}
-
-button,
-select {
   text-transform: none;
-}
-
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
   -webkit-appearance: button;
-}
-
-img,
-button {
   cursor: pointer;
 }
 

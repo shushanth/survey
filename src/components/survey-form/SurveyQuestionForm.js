@@ -16,14 +16,7 @@ const SurveyQuestionForm = memo(({ questions, onSurveyComplete }) => {
   const [formQuestions, setFormQuestions] = useState(questions);
   const [isFormDirty, setFormDirty] = useState(false);
 
-  /**
-   * loads only once the component gets mounted
-   * sets the form questions, when the component gets mounted
-   * question data gets set and passed checkbox based on the
-   * each question options
-   */
-
-  useEffect(() => {
+  const updateFormQuestionsOptions = () => {
     const updatedFormOptions = formQuestions.map(question => {
       const updatedOptions = question.options.map(option => ({
         id: uniqueId(),
@@ -33,6 +26,17 @@ const SurveyQuestionForm = memo(({ questions, onSurveyComplete }) => {
       return { ...question, options: updatedOptions };
     });
     setFormQuestions(updatedFormOptions);
+  };
+
+  /**
+   * loads only once the component gets mounted
+   * sets the form questions, when the component gets mounted
+   * question data gets set and passed checkbox based on the
+   * each question options
+   */
+
+  useEffect(() => {
+    updateFormQuestionsOptions();
   }, []);
 
   const onQuestionSelect = (selectedId, questionId) => {
@@ -58,6 +62,18 @@ const SurveyQuestionForm = memo(({ questions, onSurveyComplete }) => {
     });
     setFormDirty(true);
     setFormQuestions(updatedFormQuestions);
+  };
+
+  const onFormSubmit = () => {
+    let completedFormValues = [];
+    formQuestions.map(formQuestion => {
+      formQuestion.options.map(({ selected, value }) => {
+        if (selected) {
+          completedFormValues.push({ question_id: formQuestion.id, value });
+        }
+      });
+    });
+    onSurveyComplete(completedFormValues);
   };
 
   //render jsx of questions and its form with required input form elements
@@ -86,17 +102,6 @@ const SurveyQuestionForm = memo(({ questions, onSurveyComplete }) => {
     });
   };
 
-  const onFormSubmit = () => {
-    let completedFormValues = [];
-    formQuestions.map(formQuestion => {
-      formQuestion.options.map(({ selected, value }) => {
-        if (selected) {
-          completedFormValues.push({ question_id: formQuestion.id, value });
-        }
-      });
-    });
-    onSurveyComplete(completedFormValues);
-  };
   return (
     <>
       {<div className="survey_question_form">{renderQuestionForm()}</div>}

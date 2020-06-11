@@ -7,7 +7,10 @@ import {
   postSurveySuccess,
   postSurveyFailure,
 } from './actions';
-import { getMockSurveys, getPostSurveys } from '../reducers/mocks/mockSurveys';
+import {
+  getMockSurveys,
+  getMockPostSurveys,
+} from '../reducers/mocks/mockSurveys';
 
 describe('actions', () => {
   let mockFetchSurveys = [];
@@ -60,9 +63,9 @@ describe('actions', () => {
   it('should create action to post surveys success', () => {
     const expectedAction = {
       type: 'POST_SURVEY_SUCCESS',
-      payload: getPostSurveys(),
+      payload: getMockPostSurveys(),
     };
-    expect(postSurveySuccess(getPostSurveys())).toEqual(expectedAction);
+    expect(postSurveySuccess(getMockPostSurveys())).toEqual(expectedAction);
   });
 
   it('should create action to fetch surveys request', () => {

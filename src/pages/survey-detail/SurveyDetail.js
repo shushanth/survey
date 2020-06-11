@@ -11,7 +11,12 @@ import { isEmpty } from 'lodash';
 
 import SurveyQuestionForm from '../../components/survey-form/SurveyQuestionForm';
 import { httpService } from '../../api/httpService';
-import { BaseLayout, BaseHeading, BaseToast } from '../../shared/components';
+import {
+  BaseLayout,
+  BaseHeading,
+  BaseToast,
+  BaseLoading,
+} from '../../shared/components';
 import { moveScrollTop } from '../../shared/utils/utilities';
 import {
   fetchSurveyQuestionsRequest,
@@ -110,7 +115,7 @@ const SurveyDetail = ({ history }) => {
         </BaseHeading>
       </div>
       {!areQuestionsAvailable() ? (
-        <p>loading...</p>
+        <BaseLoading />
       ) : (
         <SurveyQuestionForm
           questions={selectedSurvey.questions}

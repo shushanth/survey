@@ -19,7 +19,8 @@ export const apiService = request => {
       handleSuccessError(response, config);
     },
     POST: async config => {
-      const response = await axios.post(`${BASE_URL}${url}`, config.data);
+      const { data } = config;
+      const response = await axios.post(`${BASE_URL}${url}`, data);
       handleSuccessError(response, config);
     },
   };

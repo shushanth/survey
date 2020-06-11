@@ -24,7 +24,7 @@ const BaseToast = memo(({ id, msg, level, offset, afterClose }) => {
       afterClose(id);
     }, offset * 1000);
     return () => clearTimeout(timer);
-  }, [afterClose, offset]);
+  }, [afterClose, offset, id]);
 
   return (
     isToastDisplayed && (

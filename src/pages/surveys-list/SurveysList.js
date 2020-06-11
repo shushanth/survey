@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty, uniqueId } from 'lodash';
 
 import { httpService } from '../../api/httpService';
-import { BaseLayout, BaseHeading } from '../../shared/components';
+import { BaseLayout, BaseHeading, BaseLoading } from '../../shared/components';
 import {
   fetchSurveysRequest,
   fetchSurveysSuccess,
@@ -65,7 +65,7 @@ const SurveysList = ({ history }) => {
       <div className="app-hz-line"></div>
       <div className="surveys_list_container">
         {surveysLoading || isEmpty(availableSurveys) ? (
-          <p>loading...</p>
+          <BaseLoading />
         ) : (
           <div className="questions_container">
             {availableSurveys.map(({ id, title, tagline }) => {

@@ -20,23 +20,6 @@
   text-overflow: $type;
 }
 
-@mixin styles-grid($row: auto, $col: auto, $flow: row) {
-  display: grid;
-  display: -ms-grid;
-  grid-template-rows: $row;
-  grid-template-columns: $col;
-  grid-auto-flow: $flow;
-}
-
-@mixin styles-grid-gap($row: 1rem, $col: 2rem) {
-  grid-gap: $row $col;
-  -ms-grid-gap: $row $col;
-}
-
-@mixin styles-fit($type: initial) {
-  object-fit: $type;
-}
-
 @mixin styles-hz-line() {
   width: 100%;
   border: 1px solid $styles-color-gray-medium;
